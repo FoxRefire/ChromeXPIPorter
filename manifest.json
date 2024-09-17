@@ -1,0 +1,29 @@
+{
+    "name": "ChromeXPIPorter",
+    "description": "Install Chrome extension to Floorp/Firefox nightly/Librewolf",
+    "version": "1.0",
+    "manifest_version": 3,
+    "icons": {
+        "128": "icon.png"
+    },
+    "action": {
+        "default_title": "ChromeXPIPorter"
+    },
+    "background": {
+        "scripts": ["background.js"],
+        "type": "module"
+    },
+    "content_scripts": [
+        {
+          "js": ["content.js"],
+          "matches": ["*://chromewebstore.google.com/*"]
+        }
+    ],
+    "permissions": ["storage"],
+    "host_permissions": ["*://clients2.google.com/*", "*://clients2.googleusercontent.com/*"],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "XPIPorter@XPIPorter"
+        }
+    }
+}
