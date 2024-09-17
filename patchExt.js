@@ -9,9 +9,8 @@ async function patchManifest(ext){
     let randomId = (Math.random() + 1).toString(36).substring(2)
 
     if(manifest.background?.service_worker){
-        manifest.background = {
-            "scripts": [manifest.background.service_worker]
-        }
+        manifest.background.scripts = [manifest.background.service_worker]
+        delete manifest.background.service_worker
     }
     manifest.browser_specific_settings = {
         "gecko": {
