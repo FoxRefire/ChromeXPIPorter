@@ -4,6 +4,8 @@
   <div align="center">Install Chrome extension to Floorp/Firefox Nightly/Librewolf</div>
 </p>
 
+[![Firefox](https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png)](https://addons.mozilla.org/firefox/addon/chromexpiporter/)
+
 > [!CAUTION]
 > Installing untrusted extensions can pose a serious security risk.
 > Developer will not responsible for any damage caused by the user's actions.
@@ -20,3 +22,8 @@
 * Librewolf
 
 ***Except for Floorp, value of `xpinstall.signatures.required` have to set `false` in `about:config`.***
+
+# Demo
+[!](https://github.com/user-attachments/assets/be6557af-c2df-467e-b2ab-c175594e66d1)
+
+
