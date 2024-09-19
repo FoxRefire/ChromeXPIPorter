@@ -1,7 +1,7 @@
 import {patchExt} from  "/patchExt.js"
 
 chrome.action.onClicked.addListener(() => {
-    chrome.tabs.create({url: "install_manually.html"})
+    chrome.tabs.create({url: "dashboard.html"})
 })
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
