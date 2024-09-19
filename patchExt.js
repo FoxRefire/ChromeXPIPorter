@@ -4,25 +4,40 @@ function loadExtension(file){
     return zip.loadAsync(file)
 }
 
-async function patchManifest(ext){
+async function patchManifest(ext, extId, store){
     let manifest = await ext.file('manifest.json').async('text').then(txt => JSON.parse(txt))
     let randomId = (Math.random() + 1).toString(36).substring(2)
 
+    if(!manifest.background){
+        manifest.background = {
+            scripts: []
+        }
+    }
     if(manifest.background?.service_worker){
         manifest.background.scripts = [manifest.background.service_worker]
         delete manifest.background.service_worker
     }
+    manifest.background.scripts.push("uninstallHandler.js")
+
     manifest.browser_specific_settings = {
         "gecko": {
-            "id": `${randomId}@XPIPorter`
+            "id": `${extId || randomId}@${store || ""}_XPIPorter`
         }
     }
 
     ext.file("manifest.json", JSON.stringify(manifest, null, "\t"))
-    return await ext.generateAsync({type: "arraybuffer"})
+    return ext
 }
 
-export async function patchExt(file){
+async function injectScripts(ext){
+    let uninstallHandler = await fetch("/injects/uninstallHandler.js").then(res => res.arrayBuffer())
+    ext.file("uninstallHandler.js", uninstallHandler)
+    return ext
+}
+
+export async function patchExt(file, extId, store){
     let ext = await loadExtension(file)
-    return await patchManifest(ext)
+    ext = await injectScripts(ext)
+    ext =  await patchManifest(ext, extId, store)
+    return await ext.generateAsync({type: "arraybuffer"})
 }

@@ -9,16 +9,22 @@ function hideSpinner(container){
 
 async function installFromCWS(container){
     showSpinner(container)
-    let xpi = await chrome.runtime.sendMessage({type:"CWS"})
+    let xpi = await chrome.runtime.sendMessage({type:"getCWS"})
     location.href = URL.createObjectURL(new Blob([xpi], {type: "application/x-xpinstall"}));
     hideSpinner(container)
 }
 
 async function main(container, target){
     container.XPIPorter = true
+    let isInstalled  = await chrome.runtime.sendMessage({type:"isInstalledCWS"})
     target.disabled = false
-    target.querySelector("span.UywwFc-vQzf8d").innerHTML = "Add to Firefox"
-    target.addEventListener("click", () => installFromCWS(container))
+    if(!isInstalled){
+        target.querySelector("span.UywwFc-vQzf8d").innerHTML = "Add to Firefox"
+        target.addEventListener("click", () => installFromCWS(container))
+    } else {
+        target.querySelector("span.UywwFc-vQzf8d").innerHTML = "Remove from Firefox"
+        target.addEventListener("click", () => chrome.runtime.sendMessage({type:"uninstall"}))
+    }
 }
 
 setInterval(() => {
