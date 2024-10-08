@@ -26,8 +26,10 @@ async function patchManifest(ext, extId, store){
         }
     }
 
-    if(manifest.web_accessible_resources?.extension_ids){
-        manifest.web_accessible_resources.extension_ids = [newExtId]
+    if(manifest.web_accessible_resources){
+        manifest.web_accessible_resources.forEach(res => {
+            if(res.extension_ids) res.extension_ids = [newExtId]
+        })
     }
 
     ext.file("manifest.json", JSON.stringify(manifest, null, "\t"))
