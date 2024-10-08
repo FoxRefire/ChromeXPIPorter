@@ -7,6 +7,7 @@ function loadExtension(file){
 async function patchManifest(ext, extId, store){
     let manifest = await ext.file('manifest.json').async('text').then(txt => JSON.parse(txt))
     let randomId = (Math.random() + 1).toString(36).substring(2)
+    let newExtId = `${extId || randomId}@${store || ""}_XPIPorter`
 
     if(!manifest.background){
         manifest.background = {
@@ -21,8 +22,12 @@ async function patchManifest(ext, extId, store){
 
     manifest.browser_specific_settings = {
         "gecko": {
-            "id": `${extId || randomId}@${store || ""}_XPIPorter`
+            "id": newExtId
         }
+    }
+
+    if(manifest.web_accessible_resources?.extension_ids){
+        manifest.web_accessible_resources.extension_ids = [newExtId]
     }
 
     ext.file("manifest.json", JSON.stringify(manifest, null, "\t"))
