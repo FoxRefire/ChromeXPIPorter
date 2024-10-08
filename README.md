@@ -1,10 +1,10 @@
 <p align="center">
   <img width="180" src="./icon.png">
-  <h1 align="center">ChromeXPIPorter</h1>
+  <h1 align="center">CRX Installer</h1>
   <div align="center">Install Chrome extension to Floorp/Firefox Nightly/Librewolf</div>
 </p>
 
-[![Firefox](https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png)](https://addons.mozilla.org/firefox/addon/chromexpiporter/)
+[![Firefox](https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png)](https://addons.mozilla.org/firefox/addon/crxinstaller/)
 
 > [!CAUTION]
 > Installing untrusted extensions can pose a serious security risk.
@@ -20,6 +20,7 @@
 * Firefox Nightly
 * Firefox Developer Edition
 * Librewolf
+* Zen browser
 
 ***Except for Floorp, value of `xpinstall.signatures.required` have to set `false` in `about:config`.***
 
