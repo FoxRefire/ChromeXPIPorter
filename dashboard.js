@@ -20,8 +20,15 @@ for(let ext of installedAddons) {
 }
 
 function installResult(ab){
-    let blob = new Blob([ab], {type: "application/x-xpinstall"});
-    location.href = URL.createObjectURL(blob);
+    let blobLink = URL.createObjectURL(new Blob([ab], {type: "application/x-xpinstall"}))
+    location.href = blobLink
+
+    let debugElm = document.createElement("a")
+    debugElm.download = "debug.xpi"
+    debugElm.href = blobLink
+    console.log("%c Debugging Information of CRX Installer", "font-size: large")
+    console.log("If you need generated xpi for debugging, store following object as global variable and run `temp0.click()`:")
+    console.log(debugElm)
 }
 
 async function queryLatest(source, extId){

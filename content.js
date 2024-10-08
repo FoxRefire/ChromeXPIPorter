@@ -10,7 +10,16 @@ function hideSpinner(container){
 async function installFromCWS(container){
     showSpinner(container)
     let xpi = await chrome.runtime.sendMessage({type:"getCWS"})
-    location.href = URL.createObjectURL(new Blob([xpi], {type: "application/x-xpinstall"}));
+    let blobLink = URL.createObjectURL(new Blob([xpi], {type: "application/x-xpinstall"}))
+    location.href = blobLink
+
+    let debugElm = document.createElement("a")
+    debugElm.download = "debug.xpi"
+    debugElm.href = blobLink
+    console.log("%c Debugging Information of CRX Installer", "font-size: large")
+    console.log("If you need generated xpi for debugging, store following object as global variable and run `temp0.click()`:")
+    console.log(debugElm)
+
     hideSpinner(container)
 }
 
