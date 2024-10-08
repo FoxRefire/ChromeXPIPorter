@@ -1,7 +1,7 @@
 {
     "name": "CRX Installer",
     "description": "Install Chrome extension to Floorp/Firefox nightly/Librewolf",
-    "version": "1.2",
+    "version": "1.3",
     "manifest_version": 3,
     "icons": {
         "128": "icon.png"
